@@ -157,8 +157,8 @@ LEFT JOIN {config.TABLE_SITEMAPS} s on u.sitemap_id = s.id AND s.state = 1
 WHERE u.operation_status <> 3 
   AND u.domain_id ={url_id} 
   AND u.state = 1 
-  AND u.crawl_state = 0 and u.url like "%/collections/%" 
-  {conditions} limit 10"""
+  AND u.crawl_state = 0 
+  {conditions} limit 47"""
                 print(query)
                 cursor.execute(query)
 
@@ -713,7 +713,7 @@ class ScraperApp:
 
     def run(self):
         # 采集url：domain_urls = {'ankersolix.com': 1,'eufy':3, 'anker.com': 4, 'soundcore.com': 5}
-        domain_urls = {'eufy': 3}
+        domain_urls = {'soundcore.com': 5}
         reader = DBURLReader(domain_urls=domain_urls)
         urls   = reader.read_urls()
         if not urls:
@@ -743,7 +743,7 @@ if __name__ == "__main__":
         sleep_min=0.8,
         sleep_max=2.0,
         headless=True,
-        timeout=60000,
+        timeout=45000,
         max_retries=3,
         use_proxy=True,
         proxy_pool_size=5,
